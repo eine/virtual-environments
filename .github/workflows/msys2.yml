@@ -1,0 +1,29 @@
+name: MSYS2
+
+on:
+  push:
+  pull_request:
+
+jobs:
+
+  win:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        task: [ true, false ]
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+
+    - uses: msys2/setup-msys2@v2
+      with:
+        release: ${{ matrix.task }}
+        update: true
+        install: base-devel git
+
+    - uses: actions/checkout@v2
+
+    - run: gcc --version
