@@ -22,7 +22,7 @@ jobs:
       with:
         release: ${{ matrix.task }}
         update: true
-        install: base-devel git
+        install: base-devel gcc git
 
     - uses: actions/checkout@v2
 
